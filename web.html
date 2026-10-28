@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Saffron & Stone — seasonal cooking, thoughtful hospitality, and memorable meals.">
+  <title>Saffron & Stone | Restaurant</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --ink: #22231f;
+      --muted: #77766f;
+      --cream: #f7f4ed;
+      --paper: #fffdf8;
+      --green: #354c3d;
+      --gold: #bb8b51;
+      --line: #e7e1d6;
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      background: var(--paper);
+      font-family: "DM Sans", sans-serif;
+      line-height: 1.6;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    button, input, select, textarea { font: inherit; }
+
+    .container { width: min(1120px, calc(100% - 40px)); margin: auto; }
+    .eyebrow {
+      color: var(--gold);
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .18em;
+      text-transform: uppercase;
+    }
+    h1, h2, h3, blockquote { font-family: "Playfair Display", Georgia, serif; }
+    h2 { margin: 0 0 14px; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.15; }
+    .section-intro { max-width: 620px; margin: 0 auto 42px; color: var(--muted); }
+    section { padding: 88px 0; }
+    .center { text-align: center; }
+
+    /* Header and responsive navigation */
+    .site-header {
+      position: absolute;
+      z-index: 5;
+      top: 0;
+      width: 100%;
+      color: white;
+      border-bottom: 1px solid rgb(255 255 255 / 20%);
+    }
+    .nav {
+      min-height: 78px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+    .brand {
+      font-family: "Playfair Display", Georgia, serif;
+      font-size: 1.4rem;
+      font-weight: 600;
+      letter-spacing: .03em;
+    }
+    .brand span { color: #e1bd8e; }
+    .nav-links { display: flex; align-items: center; gap: 28px; }
+    .nav-links a { font-size: .9rem; }
+    .nav-links a:hover { color: #e1bd8e; }
+    .nav-toggle {
+      display: none;
+      color: white;
+      background: transparent;
+      border: 0;
+      font-size: 1.7rem;
+      cursor: pointer;
+    }
+    .button {
+      display: inline-block;
+      padding: 13px 22px;
+      color: white;
+      background: var(--green);
+      border: 1px solid var(--green);
+      cursor: pointer;
+      transition: .2s ease;
+    }
+    .button:hover { background: #263b2e; }
+    .button-light { color: var(--ink); background: transparent; border-color: rgb(255 255 255 / 70%); }
+    .button-light:hover { color: var(--ink); background: white; }
+
+    /* Hero */
+    .hero {
+      min-height: 680px;
+      display: grid;
+      place-items: center;
+      color: white;
+      text-align: center;
+      background:
+        linear-gradient(rgb(18 22 19 / 55%), rgb(18 22 19 / 55%)),
+        url("https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=2000&q=85") center/cover;
+    }
+    .hero-content { max-width: 760px; padding: 120px 20px 70px; }
+    .hero h1 { margin: 12px 0 18px; font-size: clamp(3.2rem, 8vw, 6.5rem); line-height: 1.02; }
+    .hero p { max-width: 570px; margin: 0 auto 30px; color: #eeeae1; font-size: 1.05rem; }
+    .hero-actions { display: flex; justify-content: center; flex-wrap: wrap; gap: 12px; }
+
+    /* About and ambience */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: center;
+    }
+    .about-image {
+      width: 100%;
+      height: 480px;
+      object-fit: cover;
+    }
+    .about-copy p { color: var(--muted); }
+    .text-link { display: inline-block; margin-top: 10px; color: var(--green); font-weight: 700; }
+    .ambience { background: var(--cream); }
+    .gallery {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 16px;
+    }
+    .gallery img { width: 100%; height: 260px; object-fit: cover; }
+
+    /* Menu */
+    .menu-section { background: var(--paper); }
+    .menu-tabs { display: flex; justify-content: center; gap: 10px; flex-wrap: wrap; margin-bottom: 34px; }
+    .menu-tab {
+      padding: 9px 17px;
+      color: var(--green);
+      background: transparent;
+      border: 1px solid var(--line);
+      cursor: pointer;
+    }
+    .menu-tab.active, .menu-tab:hover { color: white; background: var(--green); border-color: var(--green); }
+    .menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 22px 50px; text-align: left; }
+    .menu-item { padding-bottom: 18px; border-bottom: 1px solid var(--line); }
+    .menu-item-top { display: flex; justify-content: space-between; gap: 16px; }
+    .menu-item h3 { margin: 0; font-size: 1.25rem; }
+    .price { color: var(--gold); font-weight: 700; white-space: nowrap; }
+    .menu-item p { margin: 6px 0 0; color: var(--muted); font-size: .92rem; }
+
+    /* Chefs and testimonials */
+    .chefs { background: var(--cream); }
+    .card-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: left; }
+    .chef-card { background: var(--paper); }
+    .chef-card img { width: 100%; height: 310px; object-fit: cover; }
+    .chef-copy { padding: 20px; }
+    .chef-copy h3 { margin: 0; font-size: 1.4rem; }
+    .chef-copy p { margin: 6px 0 0; color: var(--muted); }
+
+    .testimonials { color: white; background: var(--green); }
+    .testimonials .eyebrow { color: #e1bd8e; }
+    .quote-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; text-align: left; }
+    .quote-card { padding: 26px; border: 1px solid rgb(255 255 255 / 22%); }
+    .quote-card blockquote { margin: 0 0 18px; font-size: 1.3rem; line-height: 1.45; }
+    .quote-card p { margin: 0; color: #d5ded7; font-size: .9rem; }
+
+    /* Reservations and location */
+    .reserve-grid { display: grid; grid-template-columns: .9fr 1.1fr; gap: 60px; align-items: start; }
+    .details p { color: var(--muted); }
+    .details strong { color: var(--ink); }
+    .reservation-form {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      padding: 28px;
+      background: var(--cream);
+    }
+    .field { display: flex; flex-direction: column; gap: 6px; }
+    .field.full { grid-column: 1 / -1; }
+    .field label { font-size: .86rem; font-weight: 600; }
+    .field input, .field select, .field textarea {
+      width: 100%;
+      padding: 12px;
+      color: var(--ink);
+      background: white;
+      border: 1px solid var(--line);
+      border-radius: 0;
+    }
+    .field textarea { min-height: 90px; resize: vertical; }
+    .reservation-form .button { grid-column: 1 / -1; }
+    .form-message { grid-column: 1 / -1; margin: 0; color: var(--green); font-weight: 600; }
+
+    .map-link {
+      display: block;
+      min-height: 240px;
+      margin-top: 24px;
+      background:
+        linear-gradient(rgb(53 76 61 / 15%), rgb(53 76 61 / 15%)),
+        url("https://images.unsplash.com/photo-1519608487953-e999c86e7455?auto=format&fit=crop&w=1200&q=80") center/cover;
+    }
+    footer { padding: 28px 0; color: #e9e9e3; background: #202d24; }
+    .footer-row { display: flex; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    footer p { margin: 0; font-size: .9rem; }
+
+    @media (max-width: 760px) {
+      section { padding: 68px 0; }
+      .nav { min-height: 68px; }
+      .nav-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px;
+        left: 0;
+        right: 0;
+        padding: 22px;
+        flex-direction: column;
+        align-items: stretch;
+        gap: 18px;
+        background: #26382d;
+      }
+      .nav-links.open { display: flex; }
+      .nav-links .button { text-align: center; }
+      .about-grid, .reserve-grid { grid-template-columns: 1fr; gap: 32px; }
+      .about-image { height: 350px; }
+      .gallery { grid-template-columns: 1fr 1fr; }
+      .gallery img:first-child { grid-column: 1 / -1; }
+      .menu-grid { grid-template-columns: 1fr; }
+      .card-grid, .quote-grid { grid-template-columns: 1fr; }
+      .chef-card img { height: 350px; }
+    }
+    @media (max-width: 480px) {
+      .container { width: min(100% - 28px, 1120px); }
+      .hero { min-height: 620px; }
+      .gallery { grid-template-columns: 1fr; }
+      .gallery img, .gallery img:first-child { height: 240px; grid-column: auto; }
+      .reservation-form { grid-template-columns: 1fr; padding: 20px; }
+      .field.full, .reservation-form .button, .form-message { grid-column: auto; }
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main navigation">
+      <a class="brand" href="#home">Saffron <span>&</span> Stone</a>
+      <button class="nav-toggle" aria-label="Open navigation" aria-expanded="false">☰</button>
+      <div class="nav-links">
+        <a href="#story">Our Story</a>
+        <a href="#menu">Menu</a>
+        <a href="#chefs">Our Chefs</a>
+        <a href="#visit">Visit</a>
+        <a class="button" href="#reservation">Reserve a Table</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="hero-content">
+        <span class="eyebrow">Seasonal cooking · Thoughtful hospitality</span>
+        <h1>A table worth<br>gathering around.</h1>
+        <p>Rooted in local ingredients and inspired by the changing seasons, every meal tells a story.</p>
+        <div class="hero-actions">
+          <a class="button" href="#reservation">Book a Table</a>
+          <a class="button button-light" href="#menu">Explore the Menu</a>
+        </div>
+      </div>
+    </section>
+
+    <section id="story">
+      <div class="container about-grid">
+        <img class="about-image" src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?auto=format&fit=crop&w=1100&q=85" alt="A beautifully prepared dinner served at the restaurant">
+        <div class="about-copy">
+          <span class="eyebrow">A little about us</span>
+          <h2>Good food, made with care.</h2>
+          <p>At Saffron & Stone, we bring together seasonal produce, carefully sourced ingredients, and the pleasure of sharing a meal. Our kitchen is guided by curiosity, our service by warmth, and our dining room by the belief that the best evenings are unhurried.</p>
+          <p>Come for a quick lunch, stay for a long dinner. There’s always room at our table.</p>
+          <a class="text-link" href="#visit">Come visit us →</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="ambience">
+      <div class="container center">
+        <span class="eyebrow">The atmosphere</span>
+        <h2>Settle in and stay awhile.</h2>
+        <p class="section-intro">A welcoming space for everyday lunches, special celebrations, and everything in between.</p>
+        <div class="gallery">
+          <img src="https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1000&q=80" alt="Warm restaurant dining room">
+          <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?auto=format&fit=crop&w=850&q=80" alt="Guests sharing a meal">
+          <img src="https://images.unsplash.com/photo-1515003197210-e0cd7184f8b5?auto=format&fit=crop&w=850&q=80" alt="Carefully prepared restaurant dishes">
+        </div>
+      </div>
+    </section>
+
+    <section class="menu-section" id="menu">
+      <div class="container center">
+        <span class="eyebrow">From our kitchen</span>
+        <h2>A menu for the moment.</h2>
+        <p class="section-intro">Our menu changes with the seasons. Here are a few guest favorites. Please ask our team about today’s specials.</p>
+
+        <div class="menu-tabs" role="tablist" aria-label="Menu categories">
+          <button class="menu-tab active" data-category="starters">Starters</button>
+          <button class="menu-tab" data-category="mains">Mains</button>
+          <button class="menu-tab" data-category="desserts">Desserts</button>
+        </div>
+
+        <div class="menu-grid" id="menu-items">
+          <!-- Menu items are displayed by the script below. -->
+        </div>
+      </div>
+    </section>
+
+    <section class="chefs" id="chefs">
+      <div class="container center">
+        <span class="eyebrow">The people behind the plates</span>
+        <h2>Meet our chefs.</h2>
+        <p class="section-intro">A close-knit kitchen team, bringing skill, imagination, and a deep respect for good ingredients to every service.</p>
+        <div class="card-grid">
+          <article class="chef-card">
+            <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?auto=format&fit=crop&w=800&q=80" alt="Head Chef Elena">
+            <div class="chef-copy">
+              <h3>Elena Morris</h3>
+              <p>Executive Chef · Seasonal menus and bold, balanced flavors.</p>
+            </div>
+          </article>
+          <article class="chef-card">
+            <img src="https://images.unsplash.com/photo-1583394293214-28ded15ee548?auto=format&fit=crop&w=800&q=80" alt="Chef Marcus">
+            <div class="chef-copy">
+              <h3>Marcus Lee</h3>
+              <p>Sous Chef · Thoughtful technique and locally sourced produce.</p>
+            </div>
+          </article>
+          <article class="chef-card">
+            <img src="https://images.unsplash.com/photo-1581299894007-aaa50297cf16?auto=format&fit=crop&w=800&q=80" alt="Pastry Chef Amara">
+            <div class="chef-copy">
+              <h3>Amara Singh</h3>
+              <p>Pastry Chef · Desserts inspired by familiar comforts.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="testimonials">
+      <div class="container center">
+        <span class="eyebrow">Kind words</span>
+        <h2>At our table, in their words.</h2>
+        <div class="quote-grid">
+          <article class="quote-card">
+            <blockquote>“Every dish felt considered, and the evening never felt rushed.”</blockquote>
+            <p>— Priya K.</p>
+          </article>
+          <article class="quote-card">
+            <blockquote>“A lovely place for a special night. The staff made us feel at home.”</blockquote>
+            <p>— Daniel R.</p>
+          </article>
+          <article class="quote-card">
+            <blockquote>“Beautiful flavors, warm service, and a dining room we wanted to linger in.”</blockquote>
+            <p>— Maya S.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="visit">
+      <div class="container reserve-grid">
+        <div class="details">
+          <span class="eyebrow">Find us</span>
+          <h2>We’ll save you a seat.</h2>
+          <p><strong>Address</strong><br>24 Garden Lane, City Centre<br>Your City, 000 000</p>
+          <p><strong>Opening hours</strong><br>Monday–Friday: 12:00–2:30 PM, 6:00–10:00 PM<br>Saturday–Sunday: 12:00–10:00 PM</p>
+          <p><strong>Call us</strong><br><a href="tel:+910000000000">+91 00000 00000</a></p>
+          <!-- Replace the link with your restaurant's Google Maps URL. -->
+          <a class="map-link" href="https://maps.google.com/?q=restaurant" target="_blank" rel="noopener" aria-label="Open restaurant location in Google Maps"></a>
+        </div>
+
+        <div id="reservation">
+          <span class="eyebrow">Reservations</span>
+          <h2>Make it an occasion.</h2>
+          <p class="section-intro" style="margin: 0 0 22px;">Send us your preferred date and time. Our team will contact you to confirm your booking.</p>
+          <form class="reservation-form" id="reservation-form">
+            <div class="field">
+              <label for="name">Your name</label>
+              <input id="name" name="name" type="text" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="email">Email address</label>
+              <input id="email" name="email" type="email" autocomplete="email" required>
+            </div>
+            <div class="field">
+              <label for="date">Date</label>
+              <input id="date" name="date" type="date" required>
+            </div>
+            <div class="field">
+              <label for="time">Time</label>
+              <select id="time" name="time" required>
+                <option value="">Choose a time</option>
+                <option>12:00 PM</option>
+                <option>1:00 PM</option>
+                <option>2:00 PM</option>
+                <option>6:00 PM</option>
+                <option>7:00 PM</option>
+                <option>8:00 PM</option>
+                <option>9:00 PM</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="guests">Guests</label>
+              <select id="guests" name="guests" required>
+                <option value="">Number of guests</option>
+                <option>1 guest</option>
+                <option>2 guests</option>
+                <option>3 guests</option>
+                <option>4 guests</option>
+                <option>5 guests</option>
+                <option>6+ guests</option>
+              </select>
+            </div>
+            <div class="field">
+              <label for="phone">Phone number</label>
+              <input id="phone" name="phone" type="tel" autocomplete="tel" required>
+            </div>
+            <div class="field full">
+              <label for="notes">Special requests (optional)</label>
+              <textarea id="notes" name="notes" placeholder="Allergies, celebrations, or other requests"></textarea>
+            </div>
+            <button class="button" type="submit">Request a Reservation</button>
+            <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-row">
+      <p>© <span id="year"></span> Saffron & Stone. All rights reserved.</p>
+      <p>Good food. Good company. Always.</p>
+    </div>
+  </footer>
+
+  <script>
+    const menu = {
+      starters: [
+        { name: "Roasted Tomato Soup", description: "Basil oil, sourdough croutons, crème fraîche", price: "₹280" },
+        { name: "Burrata & Heirloom Tomato", description: "Stone fruit, garden herbs, toasted seeds", price: "₹420" },
+        { name: "Crispy Cauliflower", description: "Smoked chilli, lime, coriander yoghurt", price: "₹320" },
+        { name: "Wild Mushroom Toast", description: "Garlic mushrooms, whipped ricotta, thyme", price: "₹360" }
+      ],
+      mains: [
+        { name: "Herb-Roasted Chicken", description: "Creamy polenta, greens, pan jus", price: "₹680" },
+        { name: "Seasonal Vegetable Risotto", description: "Aged parmesan, garden herbs, lemon", price: "₹560" },
+        { name: "Grilled River Fish", description: "Coconut rice, greens, ginger-lime dressing", price: "₹720" },
+        { name: "Slow-Cooked Lamb", description: "Saffron potatoes, charred carrots, mint", price: "₹780" }
+      ],
+      desserts: [
+        { name: "Dark Chocolate Torte", description: "Crème anglaise, toasted hazelnuts", price: "₹320" },
+        { name: "Seasonal Fruit Crumble", description: "Vanilla custard, oat and almond topping", price: "₹280" },
+        { name: "Cardamom Panna Cotta", description: "Poached pear, pistachio crumb", price: "₹300" },
+        { name: "House-made Ice Cream", description: "Ask about today's flavors", price: "₹220" }
+      ]
+    };
+
+    const menuItems = document.getElementById("menu-items");
+    const tabs = document.querySelectorAll(".menu-tab");
+
+    function showMenu(category) {
+      menuItems.innerHTML = menu[category].map(item => `
+        <article class="menu-item">
+          <div class="menu-item-top">
+            <h3>${item.name}</h3>
+            <span class="price">${item.price}</span>
+          </div>
+          <p>${item.description}</p>
+        </article>
+      `).join("");
+    }
+
+    tabs.forEach(tab => {
+      tab.addEventListener("click", () => {
+        tabs.forEach(item => item.classList.remove("active"));
+        tab.classList.add("active");
+        showMenu(tab.dataset.category);
+      });
+    });
+
+    const navToggle = document.querySelector(".nav-toggle");
+    const navLinks = document.querySelector(".nav-links");
+
+    navToggle.addEventListener("click", () => {
+      const isOpen = navLinks.classList.toggle("open");
+      navToggle.setAttribute("aria-expanded", isOpen);
+      navToggle.setAttribute("aria-label", isOpen ? "Close navigation" : "Open navigation");
+      navToggle.textContent = isOpen ? "×" : "☰";
+    });
+
+    navLinks.querySelectorAll("a").forEach(link => {
+      link.addEventListener("click", () => {
+        navLinks.classList.remove("open");
+        navToggle.setAttribute("aria-expanded", "false");
+        navToggle.setAttribute("aria-label", "Open navigation");
+        navToggle.textContent = "☰";
+      });
+    });
+
+    document.getElementById("reservation-form").addEventListener("submit", event => {
+      event.preventDefault();
+      document.getElementById("form-message").textContent =
+        "Thank you! Your reservation request is ready. Please connect this form to your booking service to receive submissions.";
+    });
+
+    document.getElementById("year").textContent = new Date().getFullYear();
+    showMenu("starters");
+  </script>
+</body>
+</html>
